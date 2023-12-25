@@ -36,12 +36,12 @@ with open("settings.py", 'w') as outp:
     outp.write("    ha_device_prefix=\""+str(os.getenv("ha_device_prefix"))+"\"\n")
 
 # replicate the startup script here:
-logging.critical("Starting the Server...")
+logger.critical("Starting the Server...")
 serverpid=subprocess.Popen(["python3","server.py"])
-logging.critical("Starting the MQTT CLient...")
+logger.critical("Starting the MQTT CLient...")
 mqttClientpid=subprocess.Popen(["python3","mqtt_client.py"])
-logging.critical("Starting Control Read loop every: "+str(os.getenv("self_run_timer"))+"s")
-readpid=subprocess.Popen(["python3","read.py","self_run"])
+logger.critical("Starting Control Read loop every: "+str(os.getenv("self_run_timer"))+"s")
+readpid=subprocess.Popen(["python3","read.py"])
 
 while (True):
     if not serverpid.poll()==None:
@@ -50,11 +50,11 @@ while (True):
         serverpid=subprocess.Popen(["python3","server.py"])
     if not mqttClientpid.poll()==None:
         logger.error("MQTT Client died. restarting...")
-        logging.critical("Starting the MQTT Client...")
+        logger.critical("Starting the MQTT Client...")
         mqttClientpid=subprocess.Popen(["python3","mqtt_client.py"])
     if not readpid.poll()==None:
         logger.error("Control read loop died. restarting...")
-        logging.critical("Starting Control Read loop every: "+str(os.getenv("self_run_timer"))+"s")
-        readpid=subprocess.Popen(["python3","read.py","self_run"])
+        logger.critical("Starting Control Read loop every: "+str(os.getenv("self_run_timer"))+"s")
+        readpid=subprocess.Popen(["python3","read.py"])
     sleep(60)
     

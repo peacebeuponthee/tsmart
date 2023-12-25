@@ -1,9 +1,29 @@
 import logging, socket, sys
 from settings import TSmartSettings
 from time import sleep
+from logging.handlers import TimedRotatingFileHandler
+
+if TSmartSettings.Log_Level.lower()=="debug":
+    if TSmartSettings.Debug_File_Location=="":
+        logging.basicConfig(level=logging.DEBUG, format="%(asctime)s - %(name)s [%(levelname)s] %(message)s", handlers=[logging.StreamHandler()])
+    else:
+        logging.basicConfig(level=logging.DEBUG, format="%(asctime)s - %(name)s [%(levelname)s] %(message)s", handlers=[logging.StreamHandler(),TimedRotatingFileHandler(TSmartSettings.Debug_File_Location, when='D', interval=1, backupCount=7)])
+elif TSmartSettings.Log_Level.lower()=="info":
+    if TSmartSettings.Debug_File_Location=="":
+        logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(name)s [%(levelname)s] %(message)s", handlers=[logging.StreamHandler()])
+    else:
+        logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(name)s [%(levelname)s] %(message)s", handlers=[logging.StreamHandler(),TimedRotatingFileHandler(TSmartSettings.Debug_File_Location, when='D', interval=1, backupCount=7)])
+else:
+    if TSmartSettings.Debug_File_Location=="":
+        logging.basicConfig(level=logging.ERROR, format="%(asctime)s - %(name)s [%(levelname)s] %(message)s", handlers=[logging.StreamHandler()])
+    else:
+        logging.basicConfig(level=logging.ERROR, format="%(asctime)s - %(name)s [%(levelname)s] %(message)s", handlers=[logging.StreamHandler(),TimedRotatingFileHandler(TSmartSettings.Debug_File_Location, when='D', interval=1, backupCount=7)])
+
+
+logger = logging.getLogger("TSmart_Read")
 
 def controlRead():
-    logging.info("Sending Control Read message")
+    logger.info("Sending Control Read message")
     msgFromClient= [241,0,0,164]
     bytesToSend = bytearray(msgFromClient)
     serverAddressPort= (TSmartSettings.IP_Address, 1337)
@@ -15,13 +35,7 @@ def controlRead():
     # Send to server using created UDP socket
     UDPClientSocket.sendto(bytesToSend, serverAddressPort)
 
-def self_run():
-    while True:
-        controlRead()
-        sleep (TSmartSettings.self_run_timer)
 
-if __name__ == '__main__':
-    if len(sys.argv)==2:
-        globals()[sys.argv[1]]()
-    elif len(sys.argv)==3:
-        globals()[sys.argv[1]](sys.argv[2])
+while True:
+    controlRead()
+    sleep (TSmartSettings.self_run_timer)

@@ -29,7 +29,7 @@ logger = logging.getLogger("TSmart_HA_AUTO")
 def to_little(val):
   little_hex = bytearray.fromhex(val)
   little_hex.reverse()
-  logger.debug("Byte array format:", little_hex)
+  logger.debug("Byte array format:{}".format(little_hex))
 
   str_little = ''.join(format(x, '02x') for x in little_hex)
 
@@ -122,7 +122,7 @@ while(True):
     clientIP  = "Client IP Address:{}".format(address)
     logger.info(clientIP+": "+clientMsg)
 
-    if address[0]==TSmartSettings.IP_Address:
+    if True: #address[0]==TSmartSettings.IP_Address:
         response=message.hex()
         if response[0:2]=="f1":
             messagetype="ControlRead"
