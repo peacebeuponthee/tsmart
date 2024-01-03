@@ -32,6 +32,6 @@ ENV MQTT_Port=1883
 ENV ha_device_prefix="Boiler_Boost"
 
 
-#EXPOSE 1337
+EXPOSE 1337
 
 CMD ["python3", "/app/startup.py"]

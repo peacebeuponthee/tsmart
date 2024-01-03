@@ -24,7 +24,7 @@ else:
 TSMode=["Manual","Eco","Smart","Timer", "Travel", "Boost"]
 TSSmartState=["Uninitialised","Idle","Recording","Reproduction"]
 
-logger = logging.getLogger("TSmart_HA_AUTO")
+logger = logging.getLogger("TSmart_Server")
 
 def to_little(val):
   little_hex = bytearray.fromhex(val)
@@ -97,7 +97,7 @@ def updateFirstRun():
                 f.write(line)
 
 
-logging.critical("Inside server.py")
+logger.critical("Inside server.py")
 localIP     = "0.0.0.0"
 localPort   = 1337
 bufferSize  = 1024
@@ -107,10 +107,10 @@ try:
     UDPServerSocket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
     # Bind to address and ip
     UDPServerSocket.bind((localIP, localPort))
-    logging.critical("UDP server up and listening")
+    logger.critical("UDP server up and listening")
 except:
     e = sys.exc_info()
-    logging.error("Error: " + str(e))
+    logger.error("Error: " + str(e))
 
     # Listen for incoming datagrams
 while(True):

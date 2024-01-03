@@ -16,7 +16,7 @@
 	"containerEnv": {
 		"IP_Address": "192.168.1.19",
 		"self_run_timer": "10",
-		"Log_Level": "Error",
+		"Log_Level": "Info",
 		"Debug_File_Location": "",
 		"Print_Raw_Registers": "True",
 		"MQTT_Output": "True",
@@ -25,7 +25,8 @@
 		"MQTT_Password": "",
 		"MQTT_Topic": "BoilerBoost",
 		"MQTT_Port": "1883",
-		"ha_device_prefix": "Boiler_Boost"
+		"ha_device_prefix": "Boiler_Boost",
+		"first_run": "True"
 	},
 
 	// Use this environment variable if you need to bind mount your local source code into a new container.
@@ -41,7 +42,7 @@
 	},
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [1337]
+	"forwardPorts": [1337],
 	"appPort": ["1337:1337"],
 	"runArgs": ["--network=smart-net"],
 

@@ -38,7 +38,7 @@ def checksum(input):
 def sendCommand(bytesToSend):
     serverAddressPort= (TSmartSettings.IP_Address, 1337)
     bufferSize= 1028
-    logging.info("Sending Control Write message")
+    logger.info("Sending Control Write message")
     # Create a UDP socket at client side
     UDPClientSocket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
     # Send to server using created UDP socket
