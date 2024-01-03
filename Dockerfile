@@ -17,21 +17,21 @@ RUN pip install -r requirements.txt
 COPY TSmart TSmart
 COPY startup.py .
 
-ENV IP_Address="192.168.2.142"
+ENV IP_Address="192.168.1.19"
 ENV self_run_timer=10
 ENV Log_Level="Error"
 ENV Debug_File_Location=""
 ENV Print_Raw_Registers=True
 #MQTT Output Settings
 ENV MQTT_Output=True
-ENV MQTT_Address=""
+ENV MQTT_Address="swarm_mqtt"
 ENV MQTT_Username=""
 ENV MQTT_Password=""
-ENV MQTT_Topic="TSmart"
+ENV MQTT_Topic="BoilerBoost"
 ENV MQTT_Port=1883
-ENV ha_device_prefix="TSmart"
+ENV ha_device_prefix="Boiler_Boost"
 
 
-EXPOSE 1337
+#EXPOSE 1337
 
 CMD ["python3", "/app/startup.py"]
