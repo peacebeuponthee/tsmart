@@ -54,5 +54,5 @@
 
 	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
 	// "remoteUser": "root"
-	"postStartCommand": "sudo apt update && sudo apt install -y python3-pip && pip install -r requirements.txt"
+	"postStartCommand": "sudo apt update && sudo apt install -y python3-pip && pip install -r requirements.txt && git config --global user.name \"peacebeuponthee\" && git config --global user.email \"denis.tyutin@gmail.com\""
 }
