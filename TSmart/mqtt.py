@@ -49,7 +49,7 @@ class TSmartMQTT():
     
     def multi_MQTT_publish(rootTopic,array):   #Recieve multiple payloads with Topics and publish in a single MQTT connection
         mqtt.Client.connected_flag=False        			#create flag in class
-        client=mqtt.Client(CallbackAPIVersion=mqtt.CallbackAPIVersion.VERSION1, client_id="TSmart_MQTT")
+        client=mqtt.Client(callback_api_version=mqtt.CallbackAPIVersion.VERSION1, client_id="TSmart_MQTT")
         
         ##Check if first run then publish auto discovery message
         
