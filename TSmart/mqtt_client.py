@@ -70,7 +70,7 @@ def on_connect(client, userdata, flags, rc):
         logger.error("Bad connection Returned code= "+str(rc))
 
 
-client=mqtt.Client("TSmart_MQTT_Client")
+client=mqtt.Client(callback_api_version=mqtt.CallbackAPIVersion.VERSION1, client_id="TSmart_MQTT_Client")
 mqtt.Client.connected_flag=False        			#create flag in class
 if MQTTCredentials:
     client.username_pw_set(MQTT_Username,MQTT_Password)
