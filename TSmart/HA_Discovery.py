@@ -72,7 +72,7 @@ class HAMQTT():
     
     def publish_discovery(array):   #Recieve multiple payloads with Topics and publish in a single MQTT connection
         mqtt.Client.connected_flag=False        			#create flag in class
-        client=mqtt.Client("TSmart")
+        client=mqtt.Client(callback_api_version=mqtt.CallbackAPIVersion.VERSION1, client_id="TSmart")
         rootTopic=str(TSmartSettings.MQTT_Topic+"/")
         if HAMQTT.MQTTCredentials:
             client.username_pw_set(HAMQTT.MQTT_Username,HAMQTT.MQTT_Password)
